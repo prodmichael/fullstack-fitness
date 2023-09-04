@@ -1,13 +1,42 @@
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const User = require('../models/User')
+const keys = require('../config/keys')
 
-module.exports.login = (req, res) => {
-	res.status(200).json({
-		login: {
-			email: req.body.email,
-			password: req.body.password,
-		},
-	})
+module.exports.login = async (req, res) => {
+	const candidate = await User.findOne({ email: req.body.email })
+
+	if (candidate) {
+		// check password
+		const passwordResult = bcrypt.compareSync(
+			req.body.password,
+			candidate.password
+		)
+		if (passwordResult) {
+			// generate token
+			const token = jwt.sign(
+				{
+					email: candidate.email,
+					userId: candidate._id,
+				},
+				keys.jwt,
+				{ expiresIn: 60 * 60 }
+			)
+
+			res.status(200).json({
+				token: `Bearer ${token}`,
+			})
+		} else {
+			res.status(401).json({
+				message: 'Пароль не совпадает',
+			})
+		}
+	} else {
+		// user not found
+		res.status(404).json({
+			message: 'User не существует',
+		})
+	}
 }
 
 module.exports.register = async (req, res) => {
