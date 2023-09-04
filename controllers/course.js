@@ -1,4 +1,6 @@
-module.exports.getAll = (req, res) => {}
+module.exports.getAll = (req, res) => {
+	res.json({ message: 'Course' })
+}
 
 module.exports.getById = (req, res) => {}
 
