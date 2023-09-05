@@ -6,8 +6,8 @@
 	"scripts": {
 		"start": "node index",
 		"server": "nodemon index",
-		"client-install": "npm install --prefix mobile-fitness",
-		"client": "npm run start --prefix mobile-fitness",
+		"client-install": "npm install --prefix fitness-mobile",
+		"client": "npm run start --prefix fitness-mobile",
 		"dev": "concurrently \"npm run server\" \"npm run client\" "
 	},
 	"author": "prodmichael",
