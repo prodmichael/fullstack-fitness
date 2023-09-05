@@ -5,7 +5,10 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "node index",
-		"server": "nodemon index"
+		"server": "nodemon index",
+		"client-install": "npm install --prefix mobile-fitness",
+		"client": "npm run start --prefix mobile-fitness",
+		"dev": "concurrently \"npm run server\" \"npm run client\" "
 	},
 	"author": "prodmichael",
 	"license": "ISC",
@@ -23,6 +26,7 @@
 		"passport-jwt": "^4.0.1"
 	},
 	"devDependencies": {
+		"concurrently": "^8.2.1",
 		"nodemon": "^3.0.1"
 	}
 }
