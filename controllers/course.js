@@ -33,12 +33,12 @@ module.exports.remove = async (req, res) => {
 module.exports.create = async (req, res) => {
 	const course = new Course({
 		name: req.body.name,
-		video: req.body.video,
+		video: req.file.path,
 		user: req.user.id,
 	})
 	try {
 		await course.save()
-		res.status(200).json(course)
+		res.status(201).json(course)
 	} catch (e) {
 		errorHandler(res, e)
 	}
