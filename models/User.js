@@ -24,11 +24,11 @@ const userSchema = new Schema({
 		require: true,
 	},
 	weight: {
-		type: String,
+		type: Number,
 		require: true,
 	},
 	height: {
-		type: String,
+		type: Number,
 		require: true,
 	},
 })
